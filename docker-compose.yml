@@ -1,0 +1,26 @@
+version: "2.4"
+services:
+  client:
+    container_name: client
+    build: ./client
+    restart: always
+    mem_limit: 2048MB
+    memswap_limit: 2048MB
+    ports:
+      - "3005:3005"
+    volumes:
+      - ./client:/client
+    links:
+      - server
+    depends_on:
+      - server
+  server:
+    container_name: server
+    build: ./server
+    restart: always
+    mem_limit: 512MB
+    memswap_limit: 512MB
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./server:/server
